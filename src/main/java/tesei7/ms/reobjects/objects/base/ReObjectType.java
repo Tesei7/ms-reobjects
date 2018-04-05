@@ -1,4 +1,4 @@
-package tesei7.ms.reobjects.objects;
+package tesei7.ms.reobjects.objects.base;
 
 public enum ReObjectType {
     STUDIO,

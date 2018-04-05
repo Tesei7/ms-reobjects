@@ -1,4 +1,4 @@
-package tesei7.ms.reobjects.objects;
+package tesei7.ms.reobjects.objects.base;
 
 import lombok.Data;
 
@@ -8,9 +8,9 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "RE_OBJECTS")
 @Data
-public class ReObject {
+public class ReObject implements ReObjectBase {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private long id;
     @OneToOne
     @JoinColumn(name="address_id")

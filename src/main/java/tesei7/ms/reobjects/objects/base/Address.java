@@ -1,4 +1,4 @@
-package tesei7.ms.reobjects.objects;
+package tesei7.ms.reobjects.objects.base;
 
 import lombok.Data;
 
@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Data
 public class Address {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private long id;
     @Column(name = "zip_code")
     private String zipCode;
