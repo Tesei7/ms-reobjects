@@ -1,4 +1,4 @@
-package tesei7.ms.reobjects.objects.agents;
+package tesei7.ms.reobjects.objects.base;
 
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resource;

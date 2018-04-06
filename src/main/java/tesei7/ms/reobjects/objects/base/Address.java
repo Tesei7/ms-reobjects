@@ -1,11 +1,15 @@
 package tesei7.ms.reobjects.objects.base;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @Entity
 @Data
+@EqualsAndHashCode(exclude = "reObject")
+@ToString(exclude = "reObject")
 public class Address {
     @Id
     @GeneratedValue

@@ -12,5 +12,5 @@ import java.util.List;
 public interface AgentsClient {
     @RequestMapping(method = RequestMethod.GET,
             value = "/api/v1/agents/search/findByZipCode?zipCode={zipCode}", consumes = "application/json")
-    Resources<Agent> findAgentsByZipcode(@PathVariable("zipCode") String zipCode);
+    Resources<Agent> findAgentsByZipCode(@PathVariable("zipCode") String zipCode);
 }

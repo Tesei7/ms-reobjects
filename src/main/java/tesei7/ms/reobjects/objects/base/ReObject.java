@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "RE_OBJECTS")
 @Data
-public class ReObject implements ReObjectBase {
+public class ReObject {
     @Id
     @GeneratedValue
     private long id;

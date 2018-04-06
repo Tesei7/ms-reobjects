@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import tesei7.ms.reobjects.agent.AgentsClient;
 import tesei7.ms.reobjects.objects.base.ReObject;
+import tesei7.ms.reobjects.objects.base.ReObjectsAssembler;
 import tesei7.ms.reobjects.objects.base.ReObjectsRepository;
 
 import java.util.Collections;
@@ -40,22 +41,22 @@ public class ReObjectWithAgentsController implements ResourceProcessor<Repositor
         Page<ReObject> reObjects = reObjectsRepository.findAll(pageable);
         Page<ReObject> reObjectsWithAgents = reObjects
                 .map(reObject -> new ReObjectWithAgents(reObject,
-                        agentsClient.findAgentsByZipcode(reObject.getAddress().getZipCode()).getContent()));
-        PagedResources adminPagedResources = pagedResourcesAssembler.toResource(reObjectsWithAgents, reObjectsAssembler);
+                        agentsClient.findAgentsByZipCode(reObject.getAddress().getZipCode()).getContent()));
+        PagedResources reObjectResources = pagedResourcesAssembler.toResource(reObjectsWithAgents, reObjectsAssembler);
 
         if (reObjectsWithAgents.getContent() == null || reObjectsWithAgents.getContent().isEmpty()) {
             EmbeddedWrappers wrappers = new EmbeddedWrappers(false);
             EmbeddedWrapper wrapper = wrappers.emptyCollectionOf(ReObject.class);
             List<EmbeddedWrapper> embedded = Collections.singletonList(wrapper);
-            adminPagedResources = new PagedResources<>(embedded, adminPagedResources.getMetadata(), adminPagedResources.getLinks());
+            reObjectResources = new PagedResources<>(embedded, reObjectResources.getMetadata(), reObjectResources.getLinks());
         }
-        return new ResponseEntity<>(adminPagedResources, HttpStatus.OK);
+        return new ResponseEntity<>(reObjectResources, HttpStatus.OK);
     }
 
     @Override
     public RepositorySearchesResource process(RepositorySearchesResource repositorySearchesResource) {
         final String search = repositorySearchesResource.getId().getHref();
-        final Link customLink = new Link(search + "/withagents{?page,size,sort}").withRel("customFind");
+        final Link customLink = new Link(search + "/withagents{?page,size,sort}").withRel("withagents");
         repositorySearchesResource.add(customLink);
         return repositorySearchesResource;
     }
